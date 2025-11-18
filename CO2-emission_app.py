@@ -1,5 +1,3 @@
-
-import os
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -204,4 +202,5 @@ else:
 
 st.markdown("---")
 st.caption("Notes: The app attempts to detect and compute derived metrics (percentages, per-capita, cumulative) when possible. Verify column meanings in your CSV for correctness.")
+
 
