@@ -1,14 +1,25 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
 
 # ---------------- CONFIG ----------------
 st.set_page_config(page_title="Global CO2 & GDP Explorer (Local CSV)", layout="wide", page_icon="🌍")
 
-# Path to your local CSV file 
-df = pd.read_csv("gdp_co2_by_country_v2.csv")
-df = pd.DataFrame()
+# Path to your local CSV file (relative to repo root)
+CSV_PATH = "gdp_co2_by_country_v2.csv"
 
+# Load CSV
+if os.path.exists(CSV_PATH):
+    try:
+        df = pd.read_csv(CSV_PATH)
+        st.sidebar.success(f"Loaded local dataset: {CSV_PATH}")
+    except Exception as e:
+        st.sidebar.error(f"Failed to read CSV: {e}")
+        df = pd.DataFrame()
+else:
+    st.sidebar.error(f"Dataset not found at: {CSV_PATH}")
+    df = pd.DataFrame()
 # Normalize column names to lowercase
 if not df.empty:
     df.columns = [c.lower() for c in df.columns]
@@ -191,6 +202,7 @@ else:
 
 st.markdown("---")
 st.caption("Notes: The app attempts to detect and compute derived metrics (percentages, per-capita, cumulative) when possible. Verify column meanings in your CSV for correctness.")
+
 
 
 
