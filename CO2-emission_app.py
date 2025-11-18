@@ -8,17 +8,17 @@ st.set_page_config(page_title="Global CO2 & GDP Explorer (Local CSV)", layout="w
 # Path to your local CSV file (edit this)
 LOCAL_DATASET_PATH = "gdp_co2_by_country_v2.csv"  
 
-# # ----------------- Load data -----------------
-# if os.path.exists(LOCAL_DATASET_PATH):
-#     try:
-#         df = pd.read_csv(LOCAL_DATASET_PATH)
-#         st.sidebar.success(f"Loaded local dataset: {LOCAL_DATASET_PATH}")
-#     except Exception as e:
-#         st.sidebar.error(f"Failed to read CSV: {e}")
-#         df = pd.DataFrame()
-# else:
-#     st.sidebar.error(f"Dataset not found at: {LOCAL_DATASET_PATH}")
-#     df = pd.DataFrame()
+# ----------------- Load data -----------------
+if os.path.exists(LOCAL_DATASET_PATH):
+    try:
+        df = pd.read_csv(LOCAL_DATASET_PATH)
+        st.sidebar.success(f"Loaded local dataset: {LOCAL_DATASET_PATH}")
+    except Exception as e:
+        st.sidebar.error(f"Failed to read CSV: {e}")
+        df = pd.DataFrame()
+else:
+    st.sidebar.error(f"Dataset not found at: {LOCAL_DATASET_PATH}")
+    df = pd.DataFrame()
 
 # Normalize column names to lowercase
 if not df.empty:
@@ -202,5 +202,6 @@ else:
 
 st.markdown("---")
 st.caption("Notes: The app attempts to detect and compute derived metrics (percentages, per-capita, cumulative) when possible. Verify column meanings in your CSV for correctness.")
+
 
 
