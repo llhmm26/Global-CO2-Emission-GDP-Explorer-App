@@ -5,10 +5,8 @@ import plotly.express as px
 # ---------------- CONFIG ----------------
 st.set_page_config(page_title="Global CO2 & GDP Explorer (Local CSV)", layout="wide", page_icon="🌍")
 
-# Path to your local CSV file (edit this)
-LOCAL_DATASET_PATH = "gdp_co2_by_country_v2.csv"  
-
-df = pd.read_csv(LOCAL_DATASET_PATH)
+# Path to your local CSV file 
+df = pd.read_csv("gdp_co2_by_country_v2.csv")
 df = pd.DataFrame()
 
 # Normalize column names to lowercase
@@ -193,6 +191,7 @@ else:
 
 st.markdown("---")
 st.caption("Notes: The app attempts to detect and compute derived metrics (percentages, per-capita, cumulative) when possible. Verify column meanings in your CSV for correctness.")
+
 
 
 
